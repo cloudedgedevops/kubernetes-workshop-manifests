@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: azure-managed-disk
+  namespace: azure-pvcs
+  annotations:
+    volume.azure.com/disk-name: my-custom-disk-name
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: azure-managed-disk
+  resources:
+    requests:
+      storage: 5Gi

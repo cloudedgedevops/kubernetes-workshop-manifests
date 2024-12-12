@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx-with-fileshare-pvc
+  namespace: azure-pvcs
+spec:
+  containers:
+    - name: nginx-with-fileshare-pvc
+      image: nginx:latest
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
+      volumeMounts:
+        - mountPath: "/mnt/azure"
+          name: volume
+          readOnly: false
+  volumes:
+    - name: volume
+      persistentVolumeClaim:
+        claimName: azure-file

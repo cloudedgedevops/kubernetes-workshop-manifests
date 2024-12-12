@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod
+  namespace: secret-configmap-namespace
+spec:
+  containers:
+  - name: nginx-secret-configmap
+    image: nginx:latest
+    env:
+    # Use ConfigMap value as environment variable
+    - name: CONFIG_KEY
+      valueFrom:
+        configMapKeyRef:
+          name: demo-configmap
+          key: key1
+    # Use Secret value as environment variable
+    - name: SECRET_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: demo-secret
+          key: password
