@@ -1,6 +1,6 @@
 # Kubernetes WorkShop Repository
 
-Welcome to the **Kubernetes WorkShop Repository**! This repository contains a collection of hands-on demos that cover essential Kubernetes concepts and practices. Each demo is designed to teach you how to work with specific Kubernetes resources and configurations.
+Welcome to the **Kubernetes WorkShop Repository**!  This repository contains a collection of hands-on demos that cover essential Kubernetes concepts and practices. Each demo is designed to teach you how to work with specific Kubernetes resources and configurations.
 
 ## READMEs
 
