@@ -29,14 +29,31 @@ kubectl apply -f namespace.yaml
 
 This ensures that your resources are logically grouped under the `azure-pvcs` namespace.
 
-### 2. Create PVCs
+### 2. Create StorageClass
+
+#### Azure Managed Disk PVC
+
+This StorageClass will be backed by an Azure Managed Disk:
+
+```bash
+kubectl apply -f storageclass-disk.yaml
+```
+
+#### Azure File Share PVC
+
+This StorageClass will be backed by an Azure File Share:
+
+```bash
+kubectl apply -f storageclass-fs.yaml
+```
+### 3. Create PVCs
 
 #### Azure Managed Disk PVC
 
 This PVC will be backed by an Azure Managed Disk:
 
 ```bash
-kubectl apply -f azure-managed-disk-pvc.yaml
+kubectl apply -f pvc_disk.yaml
 ```
 
 #### Azure File Share PVC
@@ -44,15 +61,15 @@ kubectl apply -f azure-managed-disk-pvc.yaml
 This PVC will be backed by an Azure File Share:
 
 ```bash
-kubectl apply -f azure-file-pvc.yaml
+kubectl apply -f pvc_fs.yaml
 ```
 
-### 3. Create Pods Using the PVCs
+### 4. Create Pods Using the PVCs
 
 #### NGINX Pod with Azure Managed Disk PVC
 
 ```bash
-kubectl apply -f nginx-with-disk-pvc.yaml
+kubectl apply -f pod_pvc_disk.yaml
 ```
 
 This deploys an NGINX Pod with the `azure-managed-disk` PVC mounted at `/mnt/azure`.
@@ -60,12 +77,12 @@ This deploys an NGINX Pod with the `azure-managed-disk` PVC mounted at `/mnt/azu
 #### NGINX Pod with Azure File Share PVC
 
 ```bash
-kubectl apply -f nginx-with-fileshare-pvc.yaml
+kubectl apply -f pod_pvc_fs.yaml
 ```
 
 This deploys an NGINX Pod with the `azure-file` PVC mounted at `/mnt/azure`.
 
-### 4. Verify PVCs Are Bound to Pods
+### 5. Verify PVCs Are Bound to Pods
 
 After applying the resources, check that the PVCs are correctly bound and attached to the Pods:
 
@@ -77,7 +94,7 @@ kubectl get pods -n azure-pvcs
 - The `pvc` should show `Bound` under the `STATUS` column, indicating that the PVC is successfully bound to a Persistent Volume.
 - The Pods should have their corresponding PVCs attached under `Volumes`.
 
-### 5. Create a File and Verify PVC Persistence
+### 6. Create a File and Verify PVC Persistence
 
 #### Step 1: Create a File Inside the Pod
 
@@ -117,7 +134,7 @@ kubectl exec -n azure-pvcs pod/nginx-with-disk-pvc -- ls /mnt/azure
 
 You should see `test-file.txt` listed, indicating that the data is persistent even after the Pod was deleted and recreated.
 
-### 6. Troubleshooting PVC Attachment
+### 7. Troubleshooting PVC Attachment
 
 If the PVC does not seem to be properly attached to the Pod, follow these steps for troubleshooting:
 
@@ -161,7 +178,7 @@ kubectl get events -n azure-pvcs
 
 Look for errors related to PVC binding or volume mounting.
 
-### 7. Breakdown of Kubernetes Resources
+### 8. Breakdown of Kubernetes Resources
 
 This setup involves several key Kubernetes resources:
 
