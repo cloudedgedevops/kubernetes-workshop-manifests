@@ -87,7 +87,7 @@ A **ReplicaSet** ensures that a specified number of identical Pods are running a
 Create the ReplicaSet:
 
 ```bash
-kubectl apply -f nginx-replicaset.yaml
+kubectl apply -f replicaset.yaml
 ```
 
 The `nginx-replicaset.yaml` should contain the following YAML configuration:
@@ -132,7 +132,7 @@ Create the Services for the Deployment and ReplicaSet:
 kubectl apply -f nginx-deployment-service.yaml
 ```
 
-The `nginx-deployment-service.yaml` should contain the following YAML:
+The `deployment-service.yaml` should contain the following YAML:
 
 ```yaml
 apiVersion: v1
@@ -153,10 +153,10 @@ spec:
 #### Service for ReplicaSet Pods
 
 ```bash
-kubectl apply -f nginx-replicaset-service.yaml
+kubectl apply -f replicaset-service.yaml
 ```
 
-The `nginx-replicaset-service.yaml` should contain the following YAML:
+The `replicaset-service.yaml` should contain the following YAML:
 
 ```yaml
 apiVersion: v1
