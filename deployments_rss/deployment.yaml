@@ -13,10 +13,10 @@ spec:
       labels:
         app: nginx-deployment
     spec:
-      securityContext:
-        runAsUser: 1000  # Run containers as non-root user
-        runAsGroup: 1000  # Group ID for containers
-        runAsNonRoot: true  # Ensure containers do not run as root
+#      securityContext:
+#        runAsUser: 1000  # Run containers as non-root user
+#        runAsGroup: 1000  # Group ID for containers
+#        runAsNonRoot: true  # Ensure containers do not run as root
       containers:
       - name: nginx
         image: nginx:latest
